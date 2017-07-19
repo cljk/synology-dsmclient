@@ -12,4 +12,12 @@ public class Core extends WebApi {
 	public CoreUser getUser() {
 		return new CoreUser(conn);
 	}
+	
+	public CorePolling getPolling() {
+		return new CorePolling(conn);
+	}
+	
+	public CoreSystem getSystem() {
+		return new CoreSystem(conn);
+	}
 }

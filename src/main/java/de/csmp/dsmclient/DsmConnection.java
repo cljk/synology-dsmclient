@@ -2,6 +2,9 @@ package de.csmp.dsmclient;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,7 +15,11 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.ssl.SSLContextBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,7 +52,7 @@ public class DsmConnection {
 	// state
 	private String sid = null;
 	private JsonObject apiInfo = null;
-	private HttpClient httpClient = null;
+	private CloseableHttpClient httpClient = null;
 	
 	public DsmConnection(String host, int port, boolean useSsl,
 			boolean acceptAnyCert) {
@@ -167,9 +174,23 @@ public class DsmConnection {
 		return builder;
 	}
 	
-	public HttpClient getHttpClient() {
+	protected HttpClient getHttpClient() throws IOException {
 		if (httpClient == null) {
-			httpClient = HttpClients.createDefault();
+			
+			if (acceptAnyCert) {
+				try {
+					SSLContextBuilder builder = new SSLContextBuilder();
+				    builder.loadTrustMaterial(null, new TrustSelfSignedStrategy());
+				    SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
+				            builder.build(), SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+				    httpClient = HttpClients.custom().setSSLSocketFactory(
+				            sslsf).build();
+				} catch (Exception ex) {
+					throw new IOException(ex.getMessage(), ex);
+				}
+			} else {
+				httpClient = HttpClients.createDefault();
+			}
 		}
 		return httpClient;
 	}
