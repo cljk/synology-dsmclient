@@ -16,6 +16,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.csmp.dsmclient.webapi.Core;
 import de.csmp.dsmclient.webapi.DownloadStation;
 
 
@@ -139,6 +140,9 @@ public class DsmConnection {
 	public DownloadStation getDownloadStation() {
 		return new DownloadStation(this);
 	}
+	public Core getCore() {
+		return new Core(this);
+	}
 
 	
 	
@@ -180,8 +184,8 @@ public class DsmConnection {
 		} else if (apiName.equals(DownloadStation.SYNO_DOWNLOAD_STATION_TASK)) {
 			return "webapi/DownloadStation/task.cgi";
 		} 
-		throw new IOException("no mapped api path for " + apiName);
-		//return null;
+		log.warn("no mapped api path for " + apiName);
+		return "webapi/entry.cgi";
 	}
 	
 	public String getBaseUrl() {

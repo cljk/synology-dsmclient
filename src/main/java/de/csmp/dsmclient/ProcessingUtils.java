@@ -28,7 +28,7 @@ public class ProcessingUtils {
 	    
 	    JsonValue successVal = result.get("success");
 	    if (! "true".equals(successVal.toString())) {
-	    	throw new IOException("request not successful");
+	    	throw new IOException("request not successful - " + result.toString());
 	    }
 		return result;
 	}
