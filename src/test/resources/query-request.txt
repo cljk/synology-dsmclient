@@ -1,0 +1,1 @@
+https://DSM/webapi/query.cgi?query=all&api=SYNO.API.Info&method=query&version=1
