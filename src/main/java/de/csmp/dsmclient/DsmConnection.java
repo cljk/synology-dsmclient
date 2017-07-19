@@ -2,13 +2,11 @@ package de.csmp.dsmclient;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.security.KeyManagementException;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.json.JsonObject;
+import javax.net.ssl.SSLContext;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
@@ -16,10 +14,9 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.http.ssl.SSLContextBuilder;
+import org.apache.http.ssl.SSLContexts;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -74,6 +71,7 @@ public class DsmConnection {
 
 	private void setup() {
 		this.baseUrl = (useSsl ? "https://" : "http://") + host + ":" + port + "/";
+		log.debug("baseUrl: {}", baseUrl);
 	}
 
 
@@ -176,15 +174,24 @@ public class DsmConnection {
 	
 	protected HttpClient getHttpClient() throws IOException {
 		if (httpClient == null) {
-			
 			if (acceptAnyCert) {
+				log.warn("ACCEPTING ANY CERTIFICATE");
 				try {
-					SSLContextBuilder builder = new SSLContextBuilder();
-				    builder.loadTrustMaterial(null, new TrustSelfSignedStrategy());
-				    SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
-				            builder.build(), SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
-				    httpClient = HttpClients.custom().setSSLSocketFactory(
-				            sslsf).build();
+					SSLContext sslContext = SSLContexts.custom()
+                            .loadTrustMaterial(null, 
+                            		(x509CertChain, authType) -> true)
+                            .build();
+				    SSLConnectionSocketFactory sslsf = 
+				    		new SSLConnectionSocketFactory( 
+				    				sslContext, 
+				    				(hostname, session) -> {
+				    					log.warn("certificate hostname: {}", hostname);
+				    					return true;
+				    					}
+				    				);
+				    httpClient = HttpClients.custom()
+				    		.setSSLSocketFactory(sslsf)
+				    		.build();
 				} catch (Exception ex) {
 					throw new IOException(ex.getMessage(), ex);
 				}
@@ -205,7 +212,7 @@ public class DsmConnection {
 		} else if (apiName.equals(DownloadStation.SYNO_DOWNLOAD_STATION_TASK)) {
 			return "webapi/DownloadStation/task.cgi";
 		} 
-		log.warn("no mapped api path for " + apiName);
+		log.warn("no mapped api path for " + apiName + " - use default entry.cgi");
 		return "webapi/entry.cgi";
 	}
 	
