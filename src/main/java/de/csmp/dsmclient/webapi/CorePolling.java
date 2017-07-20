@@ -9,11 +9,13 @@ import javax.json.JsonObject;
 
 import de.csmp.dsmclient.DsmConnection;
 
-public class CorePolling extends WebApi {
+public class CorePolling {
 	public static final String SYNO_DOWNLOAD_STATION_TASK = "SYNO.DownloadStation.Task";
-
+	
+	DsmConnection conn;
+	
 	public CorePolling(DsmConnection conn) {
-		super(conn);		
+		this.conn = conn;	
 	}
 
 	public JsonObject getLoadData() throws IOException, URISyntaxException {
@@ -25,6 +27,6 @@ public class CorePolling extends WebApi {
 		param.put("action",  action);
 		param.put("load_disabled_port",  "" + loadDisabledPort);
 	
-		return conn.callApiMethod("SYNO.Core.Polling.Data", 1, "get", param); 
+		return conn.getWebApi().callApiMethod("SYNO.Core.Polling.Data", 1, "get", param); 
 	}
 }

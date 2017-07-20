@@ -9,11 +9,13 @@ import javax.json.JsonObject;
 
 import de.csmp.dsmclient.DsmConnection;
 
-public class CoreUser extends WebApi {
+public class CoreUser {
 	public static final String SYNO_DOWNLOAD_STATION_TASK = "SYNO.DownloadStation.Task";
 
+	DsmConnection conn;
+	
 	public CoreUser(DsmConnection conn) {
-		super(conn);		
+		this.conn = conn;	
 	}
 
 	public void create(String name, String password, String desc, String email, boolean cannotChgPasswd, boolean notifyByEmail, boolean sendPassword) throws IOException, URISyntaxException {
@@ -28,7 +30,7 @@ public class CoreUser extends WebApi {
 		param.put("notify_by_email", "" + notifyByEmail);
 		param.put("send_password", "" + sendPassword);
 		
-		JsonObject r = conn.callApiMethod("SYNO.Core.User", 1, "create", param);
+		JsonObject r = conn.getWebApi().callApiMethod("SYNO.Core.User", 1, "create", param);
 		int x = 1;
 	}
 	public void set(String name, String newName, String password, String desc, String email, boolean cannotChgPasswd, boolean notifyByEmail, boolean sendPassword) throws IOException, URISyntaxException {
@@ -46,7 +48,7 @@ public class CoreUser extends WebApi {
 		param.put("notify_by_email", "" + notifyByEmail);
 		param.put("send_password", "" + sendPassword);
 		
-		JsonObject r = conn.callApiMethod("SYNO.Core.User", 1, "set", param);
+		JsonObject r = conn.getWebApi().callApiMethod("SYNO.Core.User", 1, "set", param);
 		int x = 1;
 	}
 	
@@ -55,7 +57,7 @@ public class CoreUser extends WebApi {
 		param.put("group",  group);
 		param.put("name",  userName);
 	
-		JsonObject r = conn.callApiMethod("SYNO.Core.Group.Member", 1, "add", param);
+		JsonObject r = conn.getWebApi().callApiMethod("SYNO.Core.Group.Member", 1, "add", param);
 		int x = 1;
 	}
 	
@@ -64,7 +66,7 @@ public class CoreUser extends WebApi {
 		param.put("group",  group);
 		param.put("name",  userName);
 	
-		JsonObject r = conn.callApiMethod("SYNO.Core.Group.Member", 1, "remove", param);
+		JsonObject r = conn.getWebApi().callApiMethod("SYNO.Core.Group.Member", 1, "remove", param);
 		int x = 1;
 	}
 }

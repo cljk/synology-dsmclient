@@ -2,11 +2,13 @@ package de.csmp.dsmclient.webapi;
 
 import de.csmp.dsmclient.DsmConnection;
 
-public class Core extends WebApi {
+public class Core {
 	public static final String SYNO_DOWNLOAD_STATION_TASK = "SYNO.DownloadStation.Task";
 
+	DsmConnection conn;
+	
 	public Core(DsmConnection conn) {
-		super(conn);		
+		this.conn = conn;
 	}
 
 	public CoreUser getUser() {
