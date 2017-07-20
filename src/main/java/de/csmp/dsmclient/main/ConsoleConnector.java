@@ -51,6 +51,15 @@ public class ConsoleConnector {
 		System.out.print("utilize:");
 		jsonWriterFactory.createWriter(System.out).writeObject(utilize);
 		
+		JsonObject userList = webApi.getCore().getUser().listLocalBasic();
+		System.out.print("userList:");
+		jsonWriterFactory.createWriter(System.out).writeObject(userList);
+		
+		JsonObject groupList = webApi.getCore().getGroup().listLocal();
+		System.out.print("groupList:");
+		jsonWriterFactory.createWriter(System.out).writeObject(groupList);
+		
+		
 		
 		webApi.getAuth().logout();
 	}

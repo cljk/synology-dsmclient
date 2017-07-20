@@ -13,6 +13,10 @@ public class Core {
 		return new CoreUser(webApi);
 	}
 	
+	public CoreGroup getGroup() {
+		return new CoreGroup(webApi);
+	}
+	
 	public CorePolling getPolling() {
 		return new CorePolling(webApi);
 	}

@@ -8,14 +8,25 @@ import java.util.Map;
 import javax.json.JsonObject;
 
 public class CoreUser {
-	public static final String SYNO_DOWNLOAD_STATION_TASK = "SYNO.DownloadStation.Task";
-
+	public static final String SYNO_CORE_USER = "SYNO.Core.User";
+	
 	WebApi webApi;
 	
 	public CoreUser(WebApi webApi) {
 		this.webApi = webApi;	
 	}
 
+	public JsonObject listLocalBasic() throws IOException, URISyntaxException {
+		Map<String, String> param = new HashMap<String, String>();
+		param.put("additional",  "[\"email\",\"description\",\"expired\"]");
+		param.put("type",  "local");
+		param.put("offset",  "0");
+		param.put("limit",  "-1");
+		
+		JsonObject r = webApi.callApiMethod(SYNO_CORE_USER, 1, "list", param);
+		return r;
+	}
+	
 	public void create(String name, String password, String desc, String email, boolean cannotChgPasswd, boolean notifyByEmail, boolean sendPassword) throws IOException, URISyntaxException {
 		Map<String, String> param = new HashMap<String, String>();
 		param.put("name",  name);
@@ -28,7 +39,7 @@ public class CoreUser {
 		param.put("notify_by_email", "" + notifyByEmail);
 		param.put("send_password", "" + sendPassword);
 		
-		JsonObject r = webApi.callApiMethod("SYNO.Core.User", 1, "create", param);
+		JsonObject r = webApi.callApiMethod(SYNO_CORE_USER, 1, "create", param);
 		int x = 1;
 	}
 	public void set(String name, String newName, String password, String desc, String email, boolean cannotChgPasswd, boolean notifyByEmail, boolean sendPassword) throws IOException, URISyntaxException {
@@ -46,7 +57,7 @@ public class CoreUser {
 		param.put("notify_by_email", "" + notifyByEmail);
 		param.put("send_password", "" + sendPassword);
 		
-		JsonObject r = webApi.callApiMethod("SYNO.Core.User", 1, "set", param);
+		JsonObject r = webApi.callApiMethod(SYNO_CORE_USER, 1, "set", param);
 		int x = 1;
 	}
 	
