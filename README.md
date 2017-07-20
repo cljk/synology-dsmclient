@@ -3,9 +3,23 @@ Synology DSM WebAPI - Java client lib
 
 Small Java-Wrapper for calling Synology DSM WebAPI. My personal focus is on controlling users, groups and basic system functions - not so much the DownloadStation etc.
 
-Implementing further APIs is more or less easy.
+Implementing further APIs is more or less easy and will be improved later.
 
-Contains a mini demo console - run it with (warning: console app acceppts any certificate):
+Compile & use it
+======
+Requires Maven 3.x (perhaps 2.x will work too)
+
+Checkout and compile it
+```
+git clone https://github.com/cljk/synology-dsmclient.git
+cd synology-dsmclient
+mvn install
+```
+
+Mini-Demo
+----
+
+Focus is on providing an API to be used in other projects - but contains a mini demo console - run it with (warning: console app acceppts ANY certificate - don´t use it over internet or untrusted networks):
 ```
 mvn exec:java -Dexec.args="{dsmHostIp/dsmHostName} {dsmPort} {useSsl:true/false} {userName} {password}"
 ```
