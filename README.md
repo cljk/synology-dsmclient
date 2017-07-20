@@ -7,6 +7,9 @@ Implementing further APIs is more or less easy and will be improved later.
 
 Compile & use it
 ======
+### Status
+[![Build Status](https://travis-ci.org/cljk/synology-dsmclient.png)](https://travis-ci.org/cljk/synology-dsmclient)
+
 Requires Maven 3.x (perhaps 2.x will work too)
 
 Checkout and compile it
