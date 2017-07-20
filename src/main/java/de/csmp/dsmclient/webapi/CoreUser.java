@@ -7,15 +7,13 @@ import java.util.Map;
 
 import javax.json.JsonObject;
 
-import de.csmp.dsmclient.DsmConnection;
-
 public class CoreUser {
 	public static final String SYNO_DOWNLOAD_STATION_TASK = "SYNO.DownloadStation.Task";
 
-	DsmConnection conn;
+	WebApi webApi;
 	
-	public CoreUser(DsmConnection conn) {
-		this.conn = conn;	
+	public CoreUser(WebApi webApi) {
+		this.webApi = webApi;	
 	}
 
 	public void create(String name, String password, String desc, String email, boolean cannotChgPasswd, boolean notifyByEmail, boolean sendPassword) throws IOException, URISyntaxException {
@@ -30,7 +28,7 @@ public class CoreUser {
 		param.put("notify_by_email", "" + notifyByEmail);
 		param.put("send_password", "" + sendPassword);
 		
-		JsonObject r = conn.getWebApi().callApiMethod("SYNO.Core.User", 1, "create", param);
+		JsonObject r = webApi.callApiMethod("SYNO.Core.User", 1, "create", param);
 		int x = 1;
 	}
 	public void set(String name, String newName, String password, String desc, String email, boolean cannotChgPasswd, boolean notifyByEmail, boolean sendPassword) throws IOException, URISyntaxException {
@@ -48,7 +46,7 @@ public class CoreUser {
 		param.put("notify_by_email", "" + notifyByEmail);
 		param.put("send_password", "" + sendPassword);
 		
-		JsonObject r = conn.getWebApi().callApiMethod("SYNO.Core.User", 1, "set", param);
+		JsonObject r = webApi.callApiMethod("SYNO.Core.User", 1, "set", param);
 		int x = 1;
 	}
 	
@@ -57,7 +55,7 @@ public class CoreUser {
 		param.put("group",  group);
 		param.put("name",  userName);
 	
-		JsonObject r = conn.getWebApi().callApiMethod("SYNO.Core.Group.Member", 1, "add", param);
+		JsonObject r = webApi.callApiMethod("SYNO.Core.Group.Member", 1, "add", param);
 		int x = 1;
 	}
 	
@@ -66,7 +64,7 @@ public class CoreUser {
 		param.put("group",  group);
 		param.put("name",  userName);
 	
-		JsonObject r = conn.getWebApi().callApiMethod("SYNO.Core.Group.Member", 1, "remove", param);
+		JsonObject r = webApi.callApiMethod("SYNO.Core.Group.Member", 1, "remove", param);
 		int x = 1;
 	}
 }

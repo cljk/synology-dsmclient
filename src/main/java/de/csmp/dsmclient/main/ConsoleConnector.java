@@ -1,12 +1,10 @@
 package de.csmp.dsmclient.main;
 
-import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.json.Json;
 import javax.json.JsonObject;
-import javax.json.JsonWriter;
 import javax.json.JsonWriterFactory;
 import javax.json.stream.JsonGenerator;
 
@@ -36,9 +34,12 @@ public class ConsoleConnector {
 		JsonWriterFactory jsonWriterFactory = Json.createWriterFactory(writerProperties);
 		
 		
+		
+		// init DSM connection
 		DsmConnection conn = new DsmConnection(host, Integer.parseInt(port), Boolean.parseBoolean(useSsl), true);
 		WebApi webApi = conn.getWebApi();
 		
+		// invoke some API calls
 		JsonObject apiInfo = webApi.queryApis();
 		System.out.print("apiQuery:");
 		jsonWriterFactory.createWriter(System.out).writeObject(apiInfo);

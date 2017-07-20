@@ -5,23 +5,21 @@ import java.net.URISyntaxException;
 
 import javax.json.JsonObject;
 
-import de.csmp.dsmclient.DsmConnection;
-
 public class DownloadStation {
 	public static final String SYNO_DOWNLOAD_STATION_TASK = "SYNO.DownloadStation.Task";
 
-	DsmConnection conn;
+	WebApi webApi;
 	
-	public DownloadStation(DsmConnection conn) {
-		this.conn = conn;	
+	public DownloadStation(WebApi webApi) {
+		this.webApi = webApi;	
 	}
 
 	public JsonObject getInfo() throws IOException, URISyntaxException {
-		return conn.getWebApi().callApiMethod("SYNO.DownloadStation.Info", 1, "getinfo");
+		return webApi.callApiMethod("SYNO.DownloadStation.Info", 1, "getinfo");
 	}
 	
 	public JsonObject list() throws IOException, URISyntaxException {
-		return conn.getWebApi().callApiMethod(SYNO_DOWNLOAD_STATION_TASK, 1, "list", null);
+		return webApi.callApiMethod(SYNO_DOWNLOAD_STATION_TASK, 1, "list", null);
 	}
 	
 	

@@ -31,13 +31,14 @@ public class WebApi {
 	
 	
 	public Auth getAuth() {
-		return new Auth(conn);
+		return new Auth(this);
 	}
+	
 	public Core getCore() {
-		return new Core(conn);
+		return new Core(this);
 	}
 	public DownloadStation getDownloadStation() {
-		return new DownloadStation(conn);
+		return new DownloadStation(this);
 	}
 	
 	
@@ -113,5 +114,13 @@ public class WebApi {
 
 	public void setApiInfo(JsonObject apiInfo) {
 		this.apiInfo = apiInfo;
+	}
+
+	public DsmConnection getConn() {
+		return conn;
+	}
+
+	public void setConn(DsmConnection conn) {
+		this.conn = conn;
 	}
 }

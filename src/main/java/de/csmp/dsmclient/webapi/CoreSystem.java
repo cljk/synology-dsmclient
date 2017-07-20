@@ -7,21 +7,19 @@ import java.util.Map;
 
 import javax.json.JsonObject;
 
-import de.csmp.dsmclient.DsmConnection;
-
 public class CoreSystem {
 	public static final String SYNO_DOWNLOAD_STATION_TASK = "SYNO.DownloadStation.Task";
 
-	DsmConnection conn;
+	WebApi webApi;
 	
-	public CoreSystem(DsmConnection conn) {
-		this.conn = conn;		
+	public CoreSystem(WebApi webApi) {
+		this.webApi = webApi;		
 	}
 
 	public JsonObject getCurrentUtilization() throws IOException, URISyntaxException {
 		Map<String, String> parm = new HashMap<String, String>();
 		parm.put("type", "current");
 		
-		return conn.getWebApi().callApiMethod("SYNO.Core.System.Utilization", 1, "get", parm);
+		return webApi.callApiMethod("SYNO.Core.System.Utilization", 1, "get", parm);
 	}
 }

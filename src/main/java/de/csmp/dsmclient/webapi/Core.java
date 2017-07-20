@@ -1,25 +1,23 @@
 package de.csmp.dsmclient.webapi;
 
-import de.csmp.dsmclient.DsmConnection;
-
 public class Core {
 	public static final String SYNO_DOWNLOAD_STATION_TASK = "SYNO.DownloadStation.Task";
 
-	DsmConnection conn;
+	WebApi webApi;
 	
-	public Core(DsmConnection conn) {
-		this.conn = conn;
+	public Core(WebApi webApi) {
+		this.webApi = webApi;
 	}
 
 	public CoreUser getUser() {
-		return new CoreUser(conn);
+		return new CoreUser(webApi);
 	}
 	
 	public CorePolling getPolling() {
-		return new CorePolling(conn);
+		return new CorePolling(webApi);
 	}
 	
 	public CoreSystem getSystem() {
-		return new CoreSystem(conn);
+		return new CoreSystem(webApi);
 	}
 }
