@@ -33,17 +33,23 @@ mvn exec:java -Dexec.args="192.168.188.2 5001 true admin PASSWORD"
 ```
 
 Basically the logic of the console is:
-```
+```java
+// init DSM connection
 DsmConnection conn = new DsmConnection(host, Integer.parseInt(port), Boolean.parseBoolean(useSsl), true);
+WebApi webApi = conn.getWebApi();
 
-JsonObject apiInfo = conn.queryApis();
-System.out.println("apiQuery: " + apiInfo);
-		
-String sid = conn.login(user, password);
+// invoke some API calls
+JsonObject apiInfo = webApi.queryApis();
+System.out.print("apiQuery:");
+jsonWriterFactory.createWriter(System.out).writeObject(apiInfo);
+
+String sid = webApi.getAuth().login(user, password);
 System.out.println("sid: " + sid);
-		
-JsonObject utilize = conn.getCore().getSystem().getCurrentUtilization();
-System.out.println("util: " + utilize);
-		
-conn.logout();
+
+JsonObject utilize = webApi.getCore().getSystem().getCurrentUtilization();
+System.out.print("utilize:");
+jsonWriterFactory.createWriter(System.out).writeObject(utilize);
+
+
+webApi.getAuth().logout();
 ```
