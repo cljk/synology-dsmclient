@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/cljk/synology-dsmclient.png)](https://travis-ci.org/cljk/synology-dsmclient)
+[![Dependency Status](https://www.versioneye.com/user/projects/59765f760fb24f003f48d061/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/59765f760fb24f003f48d061)
+
 # synology-dsmclient
 Synology DSM WebAPI - Java client lib
 
@@ -7,9 +10,6 @@ Implementing further APIs is more or less easy and will be improved later.
 
 Compile & use it
 ======
-### Status
-[![Build Status](https://travis-ci.org/cljk/synology-dsmclient.png)](https://travis-ci.org/cljk/synology-dsmclient)
-
 
 Requires Maven 3.x (perhaps 2.x will work too)
 
