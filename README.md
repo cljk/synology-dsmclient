@@ -8,9 +8,7 @@ Small Java-Wrapper for calling Synology DSM WebAPI. My personal focus is on cont
 
 Implementing further APIs is more or less easy and will be improved later.
 
-Compile & use it
-======
-
+## Compile & use it
 Requires Maven 3.x (perhaps 2.x will work too)
 
 Checkout and compile it
@@ -20,9 +18,7 @@ cd synology-dsmclient
 mvn install site:site
 ```
 
-Mini-Demo
-----
-
+## Mini-Demo
 Focus is on providing an API to be used in other projects - but contains a mini demo console - run it with (warning: console app acceppts ANY certificate - don´t use it over internet or untrusted networks):
 ```
 mvn exec:java -Dexec.args="{dsmHostIp/dsmHostName} {dsmPort} {useSsl:true/false} {userName} {password}"
@@ -53,3 +49,6 @@ jsonWriterFactory.createWriter(System.out).writeObject(utilize);
 
 webApi.getAuth().logout();
 ```
+
+## Protocol reverse engineering snippets
+* [blob/master/src/site/markdown/syno-office-file-listing-requests.md](https://github.com/cljk/synology-dsmclient/blob/master/src/site/markdown/syno-office-file-listing-requests.md)
