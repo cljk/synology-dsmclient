@@ -15,22 +15,21 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 
-		<slf4jVersion>1.7.7</slf4jVersion>
+		<slf4jVersion>1.7.25</slf4jVersion>
 	</properties>
 
 
 	<build>
 
 		<plugins>
-
-<plugin>
-  <groupId>org.codehaus.mojo</groupId>
-  <artifactId>exec-maven-plugin</artifactId>
-  <version>1.6.0</version>
-  <configuration>
-    <mainClass>de.csmp.dsmclient.main.ConsoleConnector</mainClass>
-  </configuration>
-</plugin>
+			<plugin>
+			  <groupId>org.codehaus.mojo</groupId>
+			  <artifactId>exec-maven-plugin</artifactId>
+			  <version>1.6.0</version>
+			  <configuration>
+			    <mainClass>de.csmp.dsmclient.main.ConsoleConnector</mainClass>
+			  </configuration>
+			</plugin>
 		</plugins>
 
 	</build>
@@ -46,33 +45,20 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>${slf4jVersion}</version>
+			<scope>test</scope>
 		</dependency>
-
-
-		<dependency>
-			<groupId>org.fusesource.jansi</groupId>
-			<artifactId>jansi</artifactId>
-			<version>1.11</version>
-		</dependency>
-
 
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.11</version>
+			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-			<version>3.1</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.yaml</groupId>
-			<artifactId>snakeyaml</artifactId>
-			<version>1.12</version>
+			<version>3.6</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-csv -->
@@ -107,17 +93,8 @@
 		<dependency>
 		  <groupId>org.glassfish</groupId>
 		  <artifactId>javax.json</artifactId>
-		  <version>1.0.4</version>
+		  <version>1.1</version>
 		</dependency>
-
-
-<!-- https://mvnrepository.com/artifact/org.json/json -->
-<dependency>
-    <groupId>org.json</groupId>
-    <artifactId>json</artifactId>
-    <version>20170516</version>
-</dependency>
-
 
 	</dependencies>
 </project>
