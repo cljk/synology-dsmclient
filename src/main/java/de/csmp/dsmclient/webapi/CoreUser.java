@@ -8,7 +8,7 @@ import java.util.Map;
 import javax.json.JsonObject;
 
 public class CoreUser {
-	public static final String SYNO_CORE_USER = "SYNO.Core.User";
+	public static final String API_NAME = "SYNO.Core.User";
 	
 	WebApi webApi;
 	
@@ -23,7 +23,7 @@ public class CoreUser {
 		param.put("offset",  "0");
 		param.put("limit",  "-1");
 		
-		JsonObject r = webApi.callApiMethod(SYNO_CORE_USER, 1, "list", param);
+		JsonObject r = webApi.callApiMethod(API_NAME, 1, "list", param);
 		return r;
 	}
 	
@@ -39,7 +39,7 @@ public class CoreUser {
 		param.put("notify_by_email", "" + notifyByEmail);
 		param.put("send_password", "" + sendPassword);
 		
-		JsonObject r = webApi.callApiMethod(SYNO_CORE_USER, 1, "create", param);
+		JsonObject r = webApi.callApiMethod(API_NAME, 1, "create", param);
 		int x = 1;
 	}
 	public void set(String name, String newName, String password, String desc, String email, boolean cannotChgPasswd, boolean notifyByEmail, boolean sendPassword) throws IOException, URISyntaxException {
@@ -57,7 +57,7 @@ public class CoreUser {
 		param.put("notify_by_email", "" + notifyByEmail);
 		param.put("send_password", "" + sendPassword);
 		
-		JsonObject r = webApi.callApiMethod(SYNO_CORE_USER, 1, "set", param);
+		JsonObject r = webApi.callApiMethod(API_NAME, 1, "set", param);
 		int x = 1;
 	}
 	

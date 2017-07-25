@@ -6,7 +6,7 @@ import java.net.URISyntaxException;
 import javax.json.JsonObject;
 
 public class DownloadStation {
-	public static final String SYNO_DOWNLOAD_STATION_TASK = "SYNO.DownloadStation.Task";
+	public static final String API_NAME = "SYNO.DownloadStation.Task";
 
 	WebApi webApi;
 	
@@ -19,7 +19,7 @@ public class DownloadStation {
 	}
 	
 	public JsonObject list() throws IOException, URISyntaxException {
-		return webApi.callApiMethod(SYNO_DOWNLOAD_STATION_TASK, 1, "list", null);
+		return webApi.callApiMethod(API_NAME, 1, "list", null);
 	}
 	
 	

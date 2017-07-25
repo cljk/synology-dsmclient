@@ -34,6 +34,10 @@ public class WebApi {
 		return new Auth(this);
 	}
 	
+	public Office getOffice() {
+		return new Office(this);
+	}
+	
 	public Core getCore() {
 		return new Core(this);
 	}
@@ -97,7 +101,7 @@ public class WebApi {
 		
 		if (apiName.equals(Auth.SYNO_API_AUTH)) {
 			return "webapi/auth.cgi";	
-		}  else if (apiName.equals(DownloadStation.SYNO_DOWNLOAD_STATION_TASK)) {
+		}  else if (apiName.equals(DownloadStation.API_NAME)) {
 			return "webapi/DownloadStation/task.cgi";
 		} 
 		log.warn("no mapped api path for " + apiName + " - use default entry.cgi");

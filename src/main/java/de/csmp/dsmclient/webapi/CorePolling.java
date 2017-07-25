@@ -8,7 +8,7 @@ import java.util.Map;
 import javax.json.JsonObject;
 
 public class CorePolling {
-	public static final String SYNO_DOWNLOAD_STATION_TASK = "SYNO.DownloadStation.Task";
+	public static final String API_NAME = "SYNO.Core.Polling.Data";
 	
 	WebApi api;
 	
@@ -25,6 +25,6 @@ public class CorePolling {
 		param.put("action",  action);
 		param.put("load_disabled_port",  "" + loadDisabledPort);
 	
-		return api.callApiMethod("SYNO.Core.Polling.Data", 1, "get", param); 
+		return api.callApiMethod(API_NAME, 1, "get", param); 
 	}
 }

@@ -8,7 +8,7 @@ import java.util.Map;
 import javax.json.JsonObject;
 
 public class CoreGroup {
-	public static final String SYNO_DOWNLOAD_STATION_TASK = "SYNO.DownloadStation.Task";
+	public static final String API_NAME = "SYNO.Core.Group";
 
 	WebApi webApi;
 	
@@ -24,7 +24,7 @@ public class CoreGroup {
 		param.put("limit",  "-1");
 		param.put("name_only",  "false");
 		
-		JsonObject r = webApi.callApiMethod("SYNO.Core.Group", 1, "list", param);
+		JsonObject r = webApi.callApiMethod(API_NAME, 1, "list", param);
 		return r;
 	}
 }

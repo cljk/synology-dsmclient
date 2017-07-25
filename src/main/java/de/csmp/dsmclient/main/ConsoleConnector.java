@@ -59,6 +59,13 @@ public class ConsoleConnector {
 		System.out.print("groupList:");
 		jsonWriterFactory.createWriter(System.out).writeObject(groupList);
 		
+		JsonObject listSelf = webApi.getOffice().getNode().listSelf();
+		System.out.print("my Office Documents:");
+		jsonWriterFactory.createWriter(System.out).writeObject(listSelf);
+		
+		JsonObject listOther = webApi.getOffice().getNode().listOther();
+		System.out.print("shared with me Office Documents:");
+		jsonWriterFactory.createWriter(System.out).writeObject(listOther);
 		
 		
 		webApi.getAuth().logout();

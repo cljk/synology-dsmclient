@@ -8,7 +8,7 @@ import java.util.Map;
 import javax.json.JsonObject;
 
 public class CoreSystem {
-	public static final String SYNO_DOWNLOAD_STATION_TASK = "SYNO.DownloadStation.Task";
+	public static final String API_NAME = "SYNO.Core.System.Utilization";
 
 	WebApi webApi;
 	
@@ -20,6 +20,6 @@ public class CoreSystem {
 		Map<String, String> parm = new HashMap<String, String>();
 		parm.put("type", "current");
 		
-		return webApi.callApiMethod("SYNO.Core.System.Utilization", 1, "get", parm);
+		return webApi.callApiMethod(API_NAME, 1, "get", parm);
 	}
 }
