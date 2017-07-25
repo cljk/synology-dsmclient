@@ -21,11 +21,11 @@ mvn install site:site
 ## Mini-Demo
 Focus is on providing an API to be used in other projects - but contains a mini demo console - run it with (warning: console app acceppts ANY certificate - don´t use it over internet or untrusted networks):
 ```
-mvn exec:java -Dexec.args="{dsmHostIp/dsmHostName} {dsmPort} {useSsl:true/false} {userName} {password}"
+mvn compile exec:java -Dexec.args="{dsmHostIp/dsmHostName} {dsmPort} {useSsl:true/false} {userName} {password}"
 ```
 example:
 ```
-mvn exec:java -Dexec.args="192.168.188.2 5001 true admin PASSWORD"
+mvn compile exec:java -Dexec.args="192.168.188.2 5001 true admin PASSWORD"
 ```
 
 Basically the logic of the console is:
