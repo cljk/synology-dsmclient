@@ -1,3 +1,4 @@
 # syno-dsmclient
 
-No content so far
+## Protocol reverse engineering
+* [SYNO.Office.* File Listing](syno-office-file-listing-requests.html)

@@ -1,5 +1,9 @@
-get recycle bin
-===============
+# SYNO.Office.*
+
+## File listings
+
+### get recycle bin
+```
 mode:"self"
 filter:{"recycle":true}
 sort_by:"mtime"
@@ -8,10 +12,10 @@ field:{"link_id":false,"shortcut":true,"tag":true,"ctime":true,"recycle":true,"a
 api:SYNO.Office.Node
 method:list
 version:1
+```
 
-
-own files
-=========
+### own files
+```
 mode:"self"
 filter:{"parent_id":"root","recycle":false}
 sort_by:"mtime"
@@ -20,10 +24,10 @@ field:{"link_id":false,"shortcut":true,"tag":true,"ctime":true,"recycle":true,"a
 api:SYNO.Office.Node
 method:list
 version:1
+```
 
-
-shared with me
-==============
+### shared with me
+```
 mode:"other"
 sort_by:"mtime"
 sort_direction:"DESC"
@@ -31,10 +35,10 @@ field:{"link_id":false,"shortcut":true,"tag":true,"ctime":true,"recycle":true,"a
 api:SYNO.Office.Node
 method:list
 version:1
+```
 
-
-shared by me
-============
+### shared by me
+```
 mode:"self"
 filter:{"sharing":true}
 sort_by:"mtime"
@@ -43,10 +47,10 @@ field:{"link_id":false,"shortcut":true,"tag":true,"ctime":true,"recycle":true,"a
 api:SYNO.Office.Node
 method:list
 version:1
+```
 
-
-recent
-======
+### recent
+```
 mode:"recent"
 filter:{"recycle":false}
 field:{"atime":true,"shortcut":true,"tag":true}
@@ -55,23 +59,23 @@ sort_by:"atime"
 api:SYNO.Office.Node
 method:list
 version:1
+```
 
-
-starred
-=======
+### starred
+```
 sort_by:"mtime"
 sort_direction:"DESC"
 field:{"shortcut":true,"tag":true,"ctime":true,"recycle":true}
 api:SYNO.Office.Shortcut
 method:list
 version:1
+```
 
 
 
 
-
-shared with me - response
-=========================
+### shared with me - response
+```JSON
 {
   "data": {
     "nodes": [
@@ -147,11 +151,11 @@ shared with me - response
   },
   "success": true
 }
+```
 
 
-
-get folder files
-================
+### get folder files
+```
 filter:{"parent_id":"1033_88CFD0CF3F0751EE23DD5FF3A76CDD06D1E47A50447850DEB3988256C2CE145C1ECC58F53A42970C43F529BAE49CC3CB"}
 mode:"other"
 sort_by:"mtime"
@@ -160,10 +164,10 @@ field:{"link_id":false,"shortcut":true,"tag":true,"ctime":true,"recycle":true,"a
 api:SYNO.Office.Node
 method:list
 version:1
+```
 
-
-get folder files - response
-===========================
+### get folder files - response
+```JSON
 {
   "data": {
     "nodes": [
@@ -206,3 +210,4 @@ get folder files - response
   },
   "success": true
 }
+```
