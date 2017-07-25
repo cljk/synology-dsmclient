@@ -17,7 +17,7 @@ Checkout and compile it
 ```
 git clone https://github.com/cljk/synology-dsmclient.git
 cd synology-dsmclient
-mvn install
+mvn install site:site
 ```
 
 Mini-Demo
