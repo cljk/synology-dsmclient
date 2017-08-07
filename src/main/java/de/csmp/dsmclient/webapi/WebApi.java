@@ -81,11 +81,18 @@ public class WebApi {
 		// TODO implement POST as default and GET as option
 		HttpGet get = new HttpGet(builder.build());
 		HttpResponse response = conn.getHttpClient().execute(get);
-		
-		JsonObject result = ProcessingUtils.processSuccessfulJsonResponse(response);
-		JsonObject data = result.getJsonObject("data");
-		log.debug("callApiMethod << {}, {}, {}", apiName, version, method);
-		return data;
+		try {
+			ProcessingUtils.assertSuccessfulHttpResponse(response);
+			
+			JsonObject result = ProcessingUtils.processJsonResponse(response);
+			ProcessingUtils.assertSuccessfulJsonResponse(result);		
+			JsonObject data = result.getJsonObject("data");
+			log.debug("callApiMethod << {}, {}, {}", apiName, version, method);
+			return data;
+		} catch (IOException e) {
+			throw new IOException(apiName + "(" + method + 
+					") - " + e.getMessage(), e);
+		}
 	}
 
 	

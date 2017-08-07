@@ -21,11 +21,20 @@ import org.slf4j.LoggerFactory;
 public class ProcessingUtils {
 	private static final Logger log = LoggerFactory.getLogger(ProcessingUtils.class);
     
-	public static JsonObject processSuccessfulJsonResponse(HttpResponse response) throws IOException {
+	public static void assertSuccessfulHttpResponse(HttpResponse response) throws IOException {
 		if (response.getStatusLine().getStatusCode() != 200) {
 			throw new IOException("HttpStatus code not successful: " + response.getStatusLine().getStatusCode());
 		}
-		
+	}
+	
+	public static void assertSuccessfulJsonResponse(JsonObject result) throws IOException {
+		JsonValue successVal = result.get("success");
+	    if (! "true".equals(successVal.toString())) {
+	    	throw new IOException("request not successful - " + result.toString());
+	    }
+	}
+	
+	public static JsonObject processJsonResponse(HttpResponse response) throws IOException {
 		HttpEntity entity = response.getEntity();
 	    
 	    //String entityContents = EntityUtils.toString(entity);
@@ -35,12 +44,10 @@ public class ProcessingUtils {
 	    JsonObject result = jsonReader.readObject();
 	    is.close();
 	    
-	    JsonValue successVal = result.get("success");
-	    if (! "true".equals(successVal.toString())) {
-	    	throw new IOException("request not successful - " + result.toString());
-	    }
-		return result;
+	    return result;
 	}
+
+
 	
 	public static CloseableHttpClient initializeHttpClient(boolean acceptAnyCert) throws IOException {
 		CloseableHttpClient httpClient;
